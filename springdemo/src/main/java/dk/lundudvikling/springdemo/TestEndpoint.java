@@ -9,13 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("test")
-@Profile("prod")
 public class TestEndpoint {
+
     @Autowired
     private BasicConfiguration basicConfiguration;
-
-    @Value("${spring.profiles.active}")
-    private String activeProfile;
 
     @Value("${welcome.message}")
     private String welcomeMessage;
@@ -25,13 +22,14 @@ public class TestEndpoint {
         return basicConfiguration.getMessage();
     }
 
-    @GetMapping("profile")
-    public String getActiveProfile(){
-        return activeProfile;
-    }
-
     @GetMapping("welcome")
     public String getWelcome(){
         return welcomeMessage;
+    }
+
+    @GetMapping("http")
+    public String getRest(){
+        HttpService service = new HttpService();
+        return service.getJsonDataFromUrl("https://httpbin.org/get");
     }
 }
