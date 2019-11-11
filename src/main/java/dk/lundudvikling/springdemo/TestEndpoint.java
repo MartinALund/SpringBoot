@@ -1,14 +1,15 @@
 package dk.lundudvikling.springdemo;
 
+import io.micrometer.core.annotation.Timed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("test")
+@Timed
 public class TestEndpoint {
 
     @Autowired
@@ -27,9 +28,4 @@ public class TestEndpoint {
         return welcomeMessage;
     }
 
-    @GetMapping("http")
-    public String getRest(){
-        HttpService service = new HttpService();
-        return service.getJsonDataFromUrl("https://httpbin.org/get");
-    }
 }
