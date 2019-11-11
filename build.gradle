@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-starter-jetty'
+	implementation 'org.springframework.boot:spring-boot-starter-undertow'
 
 	compile 'io.micrometer:micrometer-registry-prometheus:latest.release'
 
