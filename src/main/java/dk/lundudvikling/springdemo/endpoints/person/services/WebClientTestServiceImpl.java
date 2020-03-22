@@ -23,4 +23,12 @@ public class WebClientTestServiceImpl implements WebClientTestService {
                 .bodyToMono(String.class)
                 .block();
     }
+
+    @Override
+    public Mono<String> getMonoJsonWebString() {
+        return webClient.get()
+                .uri("todos/1")
+                .retrieve()
+                .bodyToMono(String.class);
+    }
 }

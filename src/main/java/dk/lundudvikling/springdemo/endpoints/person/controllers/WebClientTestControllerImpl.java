@@ -5,6 +5,7 @@ import dk.lundudvikling.springdemo.endpoints.person.interfaces.services.WebClien
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @RestController
 public class WebClientTestControllerImpl implements WebClientTestController {
@@ -18,5 +19,10 @@ public class WebClientTestControllerImpl implements WebClientTestController {
     @Override
     public ResponseEntity<String> getJsonWebString() {
         return new ResponseEntity<>(webClientTestService.getJsonWebString(), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<Mono<String>> getMonoJsonWebString() {
+        return new ResponseEntity<>(webClientTestService.getMonoJsonWebString(), HttpStatus.OK);
     }
 }
