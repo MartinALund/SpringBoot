@@ -129,6 +129,81 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "WEBCLIENT - Get json web string",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstName\": \"Martin\",\r\n        \"lastName\": \"Lund\",\r\n        \"age\": 28\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/webclient",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"webclient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WEBCLIENT - Get json web string mono",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstName\": \"Martin\",\r\n        \"lastName\": \"Lund\",\r\n        \"age\": 28\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/webclient/mono",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"webclient",
+						"mono"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
