@@ -1,6 +1,6 @@
 package dk.lundudvikling.springdemo.endpoints.person.controllers;
 
-import dk.lundudvikling.springdemo.endpoints.person.interfaces.PersonService;
+import dk.lundudvikling.springdemo.endpoints.person.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.endpoints.person.models.Person;
 import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
 import org.springframework.http.HttpStatus;

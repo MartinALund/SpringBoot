@@ -1,4 +1,4 @@
-package dk.lundudvikling.springdemo.endpoints.person.interfaces;
+package dk.lundudvikling.springdemo.endpoints.person.interfaces.services;
 
 import dk.lundudvikling.springdemo.endpoints.person.models.Person;
 
