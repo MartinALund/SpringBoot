@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Person getPersonById(long id);
-
     @Transactional
     void deletePersonById(long id);
 
