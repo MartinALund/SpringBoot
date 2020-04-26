@@ -2,8 +2,10 @@ package dk.lundudvikling.springdemo.endpoints.person.controllers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.JsonPath;
 import dk.lundudvikling.springdemo.endpoints.person.models.Person;
 import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,14 +15,19 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +44,7 @@ public class PersonControllerImplTest {
     private Person person;
 
     //Set your endpoint base path here
-    private final String BASE_PATH = "/people";
+    private final String BASE_PATH = "/people/";
 
     @Before
     public void setup(){
@@ -54,10 +61,17 @@ public class PersonControllerImplTest {
 
     @Test
     public void getPersonById() throws Exception {
+        int id = 123;
         given(personService.getPerson(123)).willReturn(person);
-        mockMvc.perform(
-                MockMvcRequestBuilders.get(BASE_PATH))
-                .andExpect(status().isOk());
+        MvcResult result = mockMvc.perform(
+                MockMvcRequestBuilders.get(BASE_PATH + id))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String name = JsonPath.read(result.getResponse().getContentAsString(), "$.firstName");
+
+
+        Assert.assertEquals("Martin", name);
     }
 
     @Test
