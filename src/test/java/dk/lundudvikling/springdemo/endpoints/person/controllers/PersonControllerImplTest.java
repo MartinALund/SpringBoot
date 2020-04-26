@@ -4,6 +4,7 @@ package dk.lundudvikling.springdemo.endpoints.person.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dk.lundudvikling.springdemo.endpoints.person.models.Person;
 import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,51 +27,64 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PersonController.class)
 public class PersonControllerImplTest {
 
+    //Mock your service here
     @MockBean
     PersonServiceImpl personService;
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void getPersonById() throws Exception {
-        Person person = new Person();
+    //Create mock object here
+    private Person person;
+
+    //Set your endpoint base path here
+    private final String BASE_PATH = "/people";
+
+    @Before
+    public void setup(){
+        setupTestPerson();
+    }
+
+    public void setupTestPerson(){
+        person = new Person();
         person.setAge(28);
         person.setFirstName("Martin");
         person.setLastName("Lund");
         person.setId(123);
+    }
+
+    @Test
+    public void getPersonById() throws Exception {
         given(personService.getPerson(123)).willReturn(person);
-        mockMvc.perform(get("/people/123"))
+        mockMvc.perform(
+                MockMvcRequestBuilders.get(BASE_PATH))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void getPeople() throws Exception {
         List<Person> people = new ArrayList<>();
-        people.add(new Person());
-        people.add(new Person());
+        people.add(person);
+        given(personService.getPeople())
+                .willReturn(people);
 
-        given(personService.getPeople()).willReturn(people);
-        mockMvc.perform(get("/people"))
+        mockMvc.perform(
+                MockMvcRequestBuilders.get(BASE_PATH))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void createPerson() throws Exception {
-
-        Person person = new Person();
-        person.setAge(28);
-        person.setFirstName("Martin");
-        person.setLastName("Lund");
-        person.setId(123);
         given(personService.createPerson(person)).willReturn(person);
-        mockMvc.perform(post("/people").contentType(APPLICATION_JSON)
+        mockMvc.perform(
+                MockMvcRequestBuilders.post(BASE_PATH)
+                        .contentType(APPLICATION_JSON)
                 .content(asJsonString(person))).andExpect(status().isCreated());
     }
 
     @Test
     public void deletePerson() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                .delete("/people/{id}", "123")
+                .delete(BASE_PATH + "/{id}", "123")
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
     }
