@@ -1,113 +1,80 @@
 package dk.lundudvikling.springdemo.endpoints.person.controllers;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jayway.jsonpath.JsonPath;
 import dk.lundudvikling.springdemo.endpoints.person.models.Person;
 import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(PersonController.class)
 public class PersonControllerImplTest {
 
-    //Mock your service here
+    private PersonController personController;
+
     @MockBean
-    PersonServiceImpl personService;
-    @Autowired
-    private MockMvc mockMvc;
+    private PersonServiceImpl personService;
 
-    //Create mock object here
-    private Person person;
-
-    //Set your endpoint base path here
-    private final String BASE_PATH = "/people/";
+    private List<Person> fakePeople;
+    private Person fakePerson;
 
     @Before
     public void setup(){
-        setupTestPerson();
+        personController = new PersonController(personService);
+        fakePerson = fakePerson();
+        fakePeople = fakePeopleData();
     }
 
-    public void setupTestPerson(){
-        person = new Person();
-        person.setAge(28);
-        person.setFirstName("Martin");
-        person.setLastName("Lund");
-        person.setId(123);
-    }
-
-    @Test
-    public void getPersonById() throws Exception {
-        int id = 123;
-        given(personService.getPerson(123)).willReturn(person);
-        MvcResult result = mockMvc.perform(
-                MockMvcRequestBuilders.get(BASE_PATH + id))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String name = JsonPath.read(result.getResponse().getContentAsString(), "$.firstName");
-
-
-        Assert.assertEquals("Martin", name);
-    }
-
-    @Test
-    public void getPeople() throws Exception {
+    private List<Person> fakePeopleData(){
         List<Person> people = new ArrayList<>();
-        people.add(person);
-        given(personService.getPeople())
-                .willReturn(people);
+        people.add(fakePerson());
+        return people;
+    }
 
-        mockMvc.perform(
-                MockMvcRequestBuilders.get(BASE_PATH))
-                .andExpect(status().isOk());
+    private Person fakePerson(){
+        return new Person("Martin", "Lund", 29);
     }
 
     @Test
-    public void createPerson() throws Exception {
-        given(personService.createPerson(person)).willReturn(person);
-        mockMvc.perform(
-                MockMvcRequestBuilders.post(BASE_PATH)
-                        .contentType(APPLICATION_JSON)
-                .content(asJsonString(person))).andExpect(status().isCreated());
+    public void testGetPeople_SunshineScenario(){
+        when(personService.getPeople()).thenReturn(fakePeople);
+        Assert.assertEquals(200, personController.getPeople().getStatusCodeValue() );
     }
 
     @Test
-    public void deletePerson() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders
-                .delete(BASE_PATH + "/{id}", "123")
-                .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNoContent());
+    public void testGetPersonById_SunshineScenario(){
+        when(personService.getPerson(any(Integer.class))).thenReturn(new Person("Martin", "Lund", 29));
+        Assert.assertEquals(200, personController.getPersonById(10).getStatusCodeValue());
     }
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    @Test
+    public void testCreatePerson_SunshineScenario(){
+        when(personService.createPerson(fakePerson)).thenReturn(fakePerson);
+        Assert.assertEquals(201, personController.createPerson(fakePerson).getStatusCodeValue());
     }
+
+    @Test
+    public void testDeletePerson_SunshineScenario(){
+        Assert.assertEquals(204, personController.deletePersonById(10).getStatusCodeValue());
+        verify(personService).deletePerson(10);
+    }
+
+    @Test
+    public void testUpdatePerson_SunshineScenario(){
+        String expectedLastName = "Lunde";
+        when(personService.updatePerson(fakePerson)).thenReturn(new Person("Martin", "Lunde", 29));
+        Person person = personController.updatePerson(fakePerson).getBody();
+        personController.updatePerson(fakePerson).getStatusCodeValue();
+        Assert.assertEquals(200, personController.updatePerson(fakePerson).getStatusCodeValue());
+        Assert.assertEquals(expectedLastName, person.getLastName());
+    }
+
 }
