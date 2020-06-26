@@ -1,8 +1,8 @@
-package dk.lundudvikling.springdemo.endpoints.person.controllers;
+package dk.lundudvikling.springdemo.personService.person.controllers;
 
-import dk.lundudvikling.springdemo.endpoints.person.interfaces.services.PersonService;
-import dk.lundudvikling.springdemo.endpoints.person.models.Person;
-import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.personService.person.interfaces.services.PersonService;
+import dk.lundudvikling.springdemo.personService.person.models.Person;
+import dk.lundudvikling.springdemo.personService.person.services.PersonServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ public class PersonController {
         this.personService = personServiceImpl;
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<Person>> getPeople(){
         return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
     }

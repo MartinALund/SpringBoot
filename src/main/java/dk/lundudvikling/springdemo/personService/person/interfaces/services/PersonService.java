@@ -1,6 +1,6 @@
-package dk.lundudvikling.springdemo.endpoints.person.interfaces.services;
+package dk.lundudvikling.springdemo.personService.person.interfaces.services;
 
-import dk.lundudvikling.springdemo.endpoints.person.models.Person;
+import dk.lundudvikling.springdemo.personService.person.models.Person;
 
 import java.util.List;
 

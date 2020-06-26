@@ -1,4 +1,4 @@
-package dk.lundudvikling.springdemo.endpoints.person.interfaces.services;
+package dk.lundudvikling.springdemo.personService.person.interfaces.services;
 
 import reactor.core.publisher.Mono;
 

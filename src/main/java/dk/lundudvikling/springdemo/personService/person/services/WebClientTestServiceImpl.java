@@ -1,6 +1,6 @@
-package dk.lundudvikling.springdemo.endpoints.person.services;
+package dk.lundudvikling.springdemo.personService.person.services;
 
-import dk.lundudvikling.springdemo.endpoints.person.interfaces.services.WebClientTestService;
+import dk.lundudvikling.springdemo.personService.person.interfaces.services.WebClientTestService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

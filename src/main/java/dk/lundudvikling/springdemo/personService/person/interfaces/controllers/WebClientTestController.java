@@ -1,4 +1,4 @@
-package dk.lundudvikling.springdemo.endpoints.person.interfaces.controllers;
+package dk.lundudvikling.springdemo.personService.person.interfaces.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

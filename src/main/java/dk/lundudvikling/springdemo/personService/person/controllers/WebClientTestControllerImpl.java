@@ -1,7 +1,7 @@
-package dk.lundudvikling.springdemo.endpoints.person.controllers;
+package dk.lundudvikling.springdemo.personService.person.controllers;
 
-import dk.lundudvikling.springdemo.endpoints.person.interfaces.controllers.WebClientTestController;
-import dk.lundudvikling.springdemo.endpoints.person.interfaces.services.WebClientTestService;
+import dk.lundudvikling.springdemo.personService.person.interfaces.controllers.WebClientTestController;
+import dk.lundudvikling.springdemo.personService.person.interfaces.services.WebClientTestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

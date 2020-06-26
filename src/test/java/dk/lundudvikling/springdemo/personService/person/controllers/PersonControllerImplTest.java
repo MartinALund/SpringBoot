@@ -1,7 +1,7 @@
-package dk.lundudvikling.springdemo.endpoints.person.controllers;
+package dk.lundudvikling.springdemo.personService.person.controllers;
 
-import dk.lundudvikling.springdemo.endpoints.person.models.Person;
-import dk.lundudvikling.springdemo.endpoints.person.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.personService.person.models.Person;
+import dk.lundudvikling.springdemo.personService.person.services.PersonServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
