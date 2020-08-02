@@ -10,6 +10,8 @@ public interface PersonService {
     List<Person> getPeople();
     List<Person> getPeopleWithIdLessThanThree();
     List<Person> getPeopleWithStartingLetter(String startingLetter);
+    List<Person> getPeopleLikeInput(String input);
+    List<Person> getPeopleByCustomLastNameQuery(String age);
     Person createPerson (Person person);
     Person updatePerson(Person person);
     void deletePerson(long id);

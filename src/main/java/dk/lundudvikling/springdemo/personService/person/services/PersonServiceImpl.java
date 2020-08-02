@@ -5,6 +5,7 @@ import dk.lundudvikling.springdemo.personService.person.models.Person;
 import dk.lundudvikling.springdemo.personService.person.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
+import javax.print.attribute.standard.PresentationDirection;
 import java.util.List;
 
 @Service
@@ -34,6 +35,16 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<Person> getPeopleWithStartingLetter(String startingLetter) {
         return repository.findByFirstNameStartingWithIgnoreCase(startingLetter);
+    }
+
+    @Override
+    public List<Person> getPeopleLikeInput(String input) {
+        return repository.findPeopleByFirstNameContainingIgnoreCase(input);
+    }
+
+    @Override
+    public List<Person> getPeopleByCustomLastNameQuery(String input) {
+        return repository.getPeopleByCustomLastNameQuery(input);
     }
 
     @Override

@@ -3,6 +3,7 @@ package dk.lundudvikling.springdemo.personService.person.repositories;
 import dk.lundudvikling.springdemo.personService.person.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,12 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
     @Query("SELECT person FROM people person WHERE person.id < 3")
     List<Person> getPeopleWhereIdIsLessThanThree();
 
+    @Query("SELECT person FROM people person WHERE person.lastName LIKE %?1%")
+    //Ordered query, first param will be injected into LIKE
+    List<Person> getPeopleByCustomLastNameQuery(@Param("lastName") String lastName);
+
     List<Person> findByFirstNameStartingWithIgnoreCase(String startingLetter);
+
+    List<Person> findPeopleByFirstNameContainingIgnoreCase(String input);
 
 }

@@ -36,6 +36,16 @@ public class PersonController {
         return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
     }
 
+    @GetMapping("like/{input}")
+    public ResponseEntity<List<Person>> getPeopleLikeInput(@PathVariable("input") String input){
+        return new ResponseEntity<>(personService.getPeopleLikeInput(input), HttpStatus.OK);
+    }
+
+    @GetMapping("like/custom/{input}")
+    public ResponseEntity<List<Person>> getPeopleCustomAgeQuery(@PathVariable("input") String input){
+        return new ResponseEntity<>(personService.getPeopleByCustomLastNameQuery(input), HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
         return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
