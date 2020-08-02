@@ -8,6 +8,8 @@ public interface PersonService {
 
     Person getPerson(long id);
     List<Person> getPeople();
+    List<Person> getPeopleWithIdLessThanThree();
+    List<Person> getPeopleWithStartingLetter(String startingLetter);
     Person createPerson (Person person);
     Person updatePerson(Person person);
     void deletePerson(long id);

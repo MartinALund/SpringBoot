@@ -25,6 +25,17 @@ public class PersonController {
     public ResponseEntity<List<Person>> getPeople(){
         return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
     }
+
+    @GetMapping("three")
+    public ResponseEntity<List<Person>> getPeopleWithIdLessthanThree(){
+        return new ResponseEntity<>(personService.getPeopleWithIdLessThanThree(), HttpStatus.OK);
+    }
+
+    @GetMapping("starts/{startingLetter}")
+    public ResponseEntity<List<Person>> getPeopleStartingWithLetter(@PathVariable("startingLetter") String startingLetter){
+        return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
         return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);

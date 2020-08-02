@@ -27,6 +27,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<Person> getPeopleWithIdLessThanThree() {
+        return repository.getPeopleWhereIdIsLessThanThree();
+    }
+
+    @Override
+    public List<Person> getPeopleWithStartingLetter(String startingLetter) {
+        return repository.findByFirstNameStartingWithIgnoreCase(startingLetter);
+    }
+
+    @Override
     public Person createPerson(Person person) {
         return repository.save(person);
     }
