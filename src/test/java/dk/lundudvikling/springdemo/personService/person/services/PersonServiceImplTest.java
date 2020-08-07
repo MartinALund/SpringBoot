@@ -1,5 +1,6 @@
 package dk.lundudvikling.springdemo.personService.person.services;
 
+import dk.lundudvikling.springdemo.personService.person.implementations.services.PersonServiceImpl;
 import dk.lundudvikling.springdemo.personService.person.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.personService.person.models.Person;
 import dk.lundudvikling.springdemo.personService.person.repositories.PersonRepository;

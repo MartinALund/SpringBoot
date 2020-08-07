@@ -3,9 +3,9 @@ package integrationTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
-import dk.lundudvikling.springdemo.personService.person.controllers.PersonController;
+import dk.lundudvikling.springdemo.personService.person.implementations.controllers.PersonControllerImpl;
 import dk.lundudvikling.springdemo.personService.person.models.Person;
-import dk.lundudvikling.springdemo.personService.person.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.personService.person.implementations.services.PersonServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +29,8 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(PersonController.class)
-public class PersonControllerImplIntegrationTest {
+@WebMvcTest(PersonControllerImpl.class)
+public class PersonControllerImplImplIntegrationTest {
 
     //Mock your service here
     @MockBean

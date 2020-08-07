@@ -1,8 +1,9 @@
-package dk.lundudvikling.springdemo.personService.person.controllers;
+package dk.lundudvikling.springdemo.personService.person.implementations.controllers;
 
+import dk.lundudvikling.springdemo.personService.person.interfaces.controllers.PersonController;
 import dk.lundudvikling.springdemo.personService.person.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.personService.person.models.Person;
-import dk.lundudvikling.springdemo.personService.person.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.personService.person.implementations.services.PersonServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,57 +12,55 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("people")
-@CrossOrigin("http://localhost:4200")
-public class PersonController {
+public class PersonControllerImpl implements PersonController {
 
     private PersonService personService;
 
-    public PersonController(PersonServiceImpl personServiceImpl) {
+    public PersonControllerImpl(PersonServiceImpl personServiceImpl) {
         this.personService = personServiceImpl;
     }
 
-    @GetMapping()
+    @Override
     public ResponseEntity<List<Person>> getPeople(){
         return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
     }
 
-    @GetMapping("three")
+    @Override
     public ResponseEntity<List<Person>> getPeopleWithIdLessthanThree(){
         return new ResponseEntity<>(personService.getPeopleWithIdLessThanThree(), HttpStatus.OK);
     }
 
-    @GetMapping("starts/{startingLetter}")
+    @Override
     public ResponseEntity<List<Person>> getPeopleStartingWithLetter(@PathVariable("startingLetter") String startingLetter){
         return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
     }
 
-    @GetMapping("like/{input}")
+    @Override
     public ResponseEntity<List<Person>> getPeopleLikeInput(@PathVariable("input") String input){
         return new ResponseEntity<>(personService.getPeopleLikeInput(input), HttpStatus.OK);
     }
 
-    @GetMapping("like/custom/{input}")
+    @Override
     public ResponseEntity<List<Person>> getPeopleCustomAgeQuery(@PathVariable("input") String input){
         return new ResponseEntity<>(personService.getPeopleByCustomLastNameQuery(input), HttpStatus.OK);
     }
 
-    @PostMapping()
+    @Override
     public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
         return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
     }
 
-    @PutMapping()
+    @Override
     public ResponseEntity<Person> updatePerson(@Valid @RequestBody Person person){
         return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
+    @Override
     public ResponseEntity<Person> getPersonById(@PathVariable("id") long id){
         return new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @Override
     public ResponseEntity<?> deletePersonById(@PathVariable("id") long id){
         personService.deletePerson(id);
         return new ResponseEntity<>("deleted person", HttpStatus.NO_CONTENT);
