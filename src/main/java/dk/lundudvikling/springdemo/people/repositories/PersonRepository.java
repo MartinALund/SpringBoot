@@ -1,6 +1,6 @@
-package dk.lundudvikling.springdemo.personService.person.repositories;
+package dk.lundudvikling.springdemo.people.repositories;
 
-import dk.lundudvikling.springdemo.personService.person.models.Person;
+import dk.lundudvikling.springdemo.people.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

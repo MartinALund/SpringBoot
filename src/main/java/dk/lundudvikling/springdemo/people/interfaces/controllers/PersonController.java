@@ -1,10 +1,9 @@
-package dk.lundudvikling.springdemo.personService.person.interfaces.controllers;
+package dk.lundudvikling.springdemo.people.interfaces.controllers;
 
-import dk.lundudvikling.springdemo.personService.person.models.Person;
+import dk.lundudvikling.springdemo.people.models.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.List;

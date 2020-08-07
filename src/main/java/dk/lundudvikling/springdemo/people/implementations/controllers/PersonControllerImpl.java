@@ -1,9 +1,9 @@
-package dk.lundudvikling.springdemo.personService.person.implementations.controllers;
+package dk.lundudvikling.springdemo.people.implementations.controllers;
 
-import dk.lundudvikling.springdemo.personService.person.interfaces.controllers.PersonController;
-import dk.lundudvikling.springdemo.personService.person.interfaces.services.PersonService;
-import dk.lundudvikling.springdemo.personService.person.models.Person;
-import dk.lundudvikling.springdemo.personService.person.implementations.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.people.implementations.services.PersonServiceImpl;
+import dk.lundudvikling.springdemo.people.interfaces.controllers.PersonController;
+import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
+import dk.lundudvikling.springdemo.people.models.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

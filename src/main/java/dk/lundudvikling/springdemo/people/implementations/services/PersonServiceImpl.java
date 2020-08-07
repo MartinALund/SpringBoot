@@ -1,11 +1,10 @@
-package dk.lundudvikling.springdemo.personService.person.implementations.services;
+package dk.lundudvikling.springdemo.people.implementations.services;
 
-import dk.lundudvikling.springdemo.personService.person.interfaces.services.PersonService;
-import dk.lundudvikling.springdemo.personService.person.models.Person;
-import dk.lundudvikling.springdemo.personService.person.repositories.PersonRepository;
+import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
+import dk.lundudvikling.springdemo.people.models.Person;
+import dk.lundudvikling.springdemo.people.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.PresentationDirection;
 import java.util.List;
 
 @Service

@@ -1,4 +1,4 @@
-package dk.lundudvikling.springdemo.personService.person.models;
+package dk.lundudvikling.springdemo.people.models;
 
 import javax.persistence.*;
 
