@@ -29,7 +29,6 @@ public class PersonControllerImplTest {
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-
         fakeDataProvider = new FakeDataProvider();
     }
 
