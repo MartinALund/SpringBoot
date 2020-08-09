@@ -1,5 +1,6 @@
 package dk.lundudvikling.springdemo.people.implementations.controllers;
 
+import dk.lundudvikling.springdemo.people.exceptions.JpaException;
 import dk.lundudvikling.springdemo.people.implementations.services.PersonServiceImpl;
 import dk.lundudvikling.springdemo.people.interfaces.controllers.PersonController;
 import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
@@ -22,50 +23,84 @@ public class PersonControllerImpl implements PersonController {
 
     @Override
     public ResponseEntity<List<Person>> getPeople(){
-        return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
     }
 
     @Override
     public ResponseEntity<List<Person>> getPeopleWithIdLessthanThree(){
-        return new ResponseEntity<>(personService.getPeopleWithIdLessThanThree(), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPeopleWithIdLessThanThree(), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<List<Person>> getPeopleStartingWithLetter(@PathVariable("startingLetter") String startingLetter){
-        return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<List<Person>> getPeopleLikeInput(@PathVariable("input") String input){
-        return new ResponseEntity<>(personService.getPeopleLikeInput(input), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPeopleLikeInput(input), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<List<Person>> getPeopleCustomAgeQuery(@PathVariable("input") String input){
-        return new ResponseEntity<>(personService.getPeopleByCustomLastNameQuery(input), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPeopleByCustomLastNameQuery(input), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
-        return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Person> updatePerson(@Valid @RequestBody Person person){
-        return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Person> getPersonById(@PathVariable("id") long id){
-        return new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<?> deletePersonById(@PathVariable("id") long id){
-        personService.deletePerson(id);
-        return new ResponseEntity<>("deleted person", HttpStatus.NO_CONTENT);
+        try {
+            personService.deletePerson(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-
-
-
 }
