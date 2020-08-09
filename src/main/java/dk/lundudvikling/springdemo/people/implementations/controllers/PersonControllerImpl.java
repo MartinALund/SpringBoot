@@ -31,42 +31,6 @@ public class PersonControllerImpl implements PersonController {
     }
 
     @Override
-    public ResponseEntity<List<Person>> getPeopleWithIdLessthanThree(){
-        try {
-            return new ResponseEntity<>(personService.getPeopleWithIdLessThanThree(), HttpStatus.OK);
-        } catch (JpaException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<List<Person>> getPeopleStartingWithLetter(@PathVariable("startingLetter") String startingLetter){
-        try {
-            return new ResponseEntity<>(personService.getPeopleWithStartingLetter(startingLetter), HttpStatus.OK);
-        } catch (JpaException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<List<Person>> getPeopleLikeInput(@PathVariable("input") String input){
-        try {
-            return new ResponseEntity<>(personService.getPeopleLikeInput(input), HttpStatus.OK);
-        } catch (JpaException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<List<Person>> getPeopleCustomAgeQuery(@PathVariable("input") String input){
-        try {
-            return new ResponseEntity<>(personService.getPeopleByCustomLastNameQuery(input), HttpStatus.OK);
-        } catch (JpaException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
     public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
         try {
             return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);

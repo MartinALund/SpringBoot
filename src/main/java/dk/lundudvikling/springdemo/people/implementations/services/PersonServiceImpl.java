@@ -36,42 +36,6 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getPeopleWithIdLessThanThree() throws JpaException {
-        try{
-            return repository.getPeopleWhereIdIsLessThanThree();
-        }catch(Exception e){
-            throw new JpaException(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Person> getPeopleWithStartingLetter(String startingLetter) throws JpaException {
-        try{
-            return repository.findByFirstNameStartingWithIgnoreCase(startingLetter);
-        }catch(Exception e){
-            throw new JpaException(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Person> getPeopleLikeInput(String input) throws JpaException {
-        try{
-            return repository.findPeopleByFirstNameContainingIgnoreCase(input);
-        }catch(Exception e){
-            throw new JpaException(e.getMessage());
-        }
-    }
-
-    @Override
-    public List<Person> getPeopleByCustomLastNameQuery(String input) throws JpaException {
-        try{
-            return repository.getPeopleByCustomLastNameQuery(input);
-        }catch(Exception e){
-            throw new JpaException(e.getMessage());
-        }
-    }
-
-    @Override
     public Person createPerson(Person person) throws JpaException {
         try{
             return repository.save(person);

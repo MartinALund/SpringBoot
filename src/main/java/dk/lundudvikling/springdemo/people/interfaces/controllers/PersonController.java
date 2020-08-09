@@ -17,26 +17,6 @@ public interface PersonController {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-    @GetMapping("three")
-    default ResponseEntity<List<Person>> getPeopleWithIdLessthanThree(){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    @GetMapping("starts/{startingLetter}")
-    default ResponseEntity<List<Person>> getPeopleStartingWithLetter(@PathVariable("startingLetter") String startingLetter){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    @GetMapping("like/{input}")
-    default ResponseEntity<List<Person>> getPeopleLikeInput(@PathVariable("input") String input){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
-    @GetMapping("like/custom/{input}")
-    default ResponseEntity<List<Person>> getPeopleCustomAgeQuery(@PathVariable("input") String input){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-    }
-
     @PostMapping()
     default ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
