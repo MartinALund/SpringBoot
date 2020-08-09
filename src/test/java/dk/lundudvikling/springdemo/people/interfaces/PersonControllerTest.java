@@ -16,27 +16,27 @@ public class PersonControllerTest implements PersonController {
     }
 
     @Test
-    public void should_defaultToHttpStatus501_IfCreatePersonIsNotOverriden(){
+    public void should_defaultToHttpStatus501_IfCreatePersonIsNotOverridden(){
         Assert.assertEquals(501, createPerson(fakeDataProvider.getFakePerson()).getStatusCodeValue());
     }
 
     @Test
-    public void should_defaultToHttpStatus501_IfGetPersonByIdIsNotOverriden(){
+    public void should_defaultToHttpStatus501_IfGetPersonByIdIsNotOverridden(){
         Assert.assertEquals(501, getPersonById(123L).getStatusCodeValue());
     }
 
     @Test
-    public void should_defaultToHttpStatus501_IfGetPeopleIsNotOverriden(){
+    public void should_defaultToHttpStatus501_IfGetPeopleIsNotOverridden(){
         Assert.assertEquals(501, getPeople().getStatusCodeValue());
     }
 
     @Test
-    public void should_defaultToHttpStatus501_IfUpdatePersonIsNotOverriden(){
+    public void should_defaultToHttpStatus501_IfUpdatePersonIsNotOverridden(){
         Assert.assertEquals(501, updatePerson(fakeDataProvider.getFakePerson()).getStatusCodeValue());
     }
 
     @Test
-    public void should_defaultToHttpStatus501_IfDeletePersonIsNotOverriden(){
+    public void should_defaultToHttpStatus501_IfDeletePersonIsNotOverridden(){
         Assert.assertEquals(501, deletePersonById(123L).getStatusCodeValue());
     }
 
