@@ -27,7 +27,6 @@ public class PersonControllerImpl implements PersonController {
             return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
         } catch (JpaException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
         }
     }
 

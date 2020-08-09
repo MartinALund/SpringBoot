@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
@@ -35,6 +36,12 @@ public class PersonControllerImplTest {
     public void should_returnHttpStatus200_whenGetPeopleIsCalled() throws JpaException {
         when(mockedService.getPeople()).thenReturn(fakeDataProvider.getFakePeople());
         Assert.assertEquals(200, systemUnderTest.getPeople().getStatusCodeValue());
+    }
+
+    @Test
+    public void should_returnHttpStatus500_whenGetPeopleCallFailsUnexpectedly() throws JpaException {
+        doThrow(JpaException.class).when(mockedService).getPeople();
+        Assert.assertEquals(500, systemUnderTest.getPeople().getStatusCodeValue());
     }
 
 }
