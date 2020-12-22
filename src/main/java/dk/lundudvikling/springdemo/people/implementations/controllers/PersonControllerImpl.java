@@ -7,9 +7,10 @@ import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.people.models.Person;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class PersonControllerImpl implements PersonController {
     }
 
     @Override
-    public ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
+    public ResponseEntity<Person> createPerson(@RequestBody Person person){
         try {
             return new ResponseEntity<>(personService.createPerson(person), HttpStatus.CREATED);
         } catch (JpaException e) {
@@ -40,7 +41,7 @@ public class PersonControllerImpl implements PersonController {
     }
 
     @Override
-    public ResponseEntity<Person> updatePerson(@Valid @RequestBody Person person){
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person){
         try {
             return new ResponseEntity<>(personService.updatePerson(person), HttpStatus.OK);
         } catch (JpaException e) {

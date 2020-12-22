@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("people")
@@ -18,12 +17,12 @@ public interface PersonController {
     }
 
     @PostMapping()
-    default ResponseEntity<Person> createPerson(@Valid @RequestBody Person person){
+    default ResponseEntity<Person> createPerson(@RequestBody Person person){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping()
-    default ResponseEntity<Person> updatePerson(@Valid @RequestBody Person person){
+    default ResponseEntity<Person> updatePerson(@RequestBody Person person){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
