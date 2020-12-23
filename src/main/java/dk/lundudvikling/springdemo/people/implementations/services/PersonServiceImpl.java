@@ -4,6 +4,9 @@ import dk.lundudvikling.springdemo.people.exceptions.JpaException;
 import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.people.models.Person;
 import dk.lundudvikling.springdemo.people.repositories.PersonRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +33,17 @@ public class PersonServiceImpl implements PersonService {
     public List<Person> getPeople() throws JpaException {
         try{
             return repository.findAll();
+        }catch(Exception e){
+            throw new JpaException(e.getMessage());
+        }
+    }
+
+    @Override
+    public Page<Person> getPeopleByFirstNamePaging(String firstName) throws JpaException {
+        Page<Person> pages = repository.findByFirstName(firstName,
+                PageRequest.of(0, 4, Sort.Direction.ASC, "lastName"));
+        try{
+            return pages;
         }catch(Exception e){
             throw new JpaException(e.getMessage());
         }

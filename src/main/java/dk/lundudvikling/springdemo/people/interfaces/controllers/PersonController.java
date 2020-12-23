@@ -1,6 +1,7 @@
 package dk.lundudvikling.springdemo.people.interfaces.controllers;
 
 import dk.lundudvikling.springdemo.people.models.Person;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,11 @@ public interface PersonController {
 
     @GetMapping()
     default ResponseEntity<List<Person>> getPeople(){
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping("pages/{firstName}")
+    default ResponseEntity<Page<Person>> getPeopleByFirstNamePaging(@PathVariable("firstName") String firstName){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 

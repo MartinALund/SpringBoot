@@ -5,6 +5,7 @@ import dk.lundudvikling.springdemo.people.implementations.services.PersonService
 import dk.lundudvikling.springdemo.people.interfaces.controllers.PersonController;
 import dk.lundudvikling.springdemo.people.interfaces.services.PersonService;
 import dk.lundudvikling.springdemo.people.models.Person;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,15 @@ public class PersonControllerImpl implements PersonController {
     public ResponseEntity<List<Person>> getPeople(){
         try {
             return new ResponseEntity<>(personService.getPeople(), HttpStatus.OK);
+        } catch (JpaException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Page<Person>> getPeopleByFirstNamePaging(String firstName) {
+        try {
+            return new ResponseEntity<>(personService.getPeopleByFirstNamePaging(firstName), HttpStatus.OK);
         } catch (JpaException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
