@@ -7,7 +7,9 @@ import dk.lundudvikling.springdemo.people.repositories.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -22,11 +24,16 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPerson(long id) throws JpaException {
+        /* psuedo old way
         try{
-            return repository.getPersonById(id);
+            return person = repository.getPersonById(id).get();
         }catch (Exception e){
-            throw new JpaException(e.getMessage());
+            throw NotFoundException();
         }
+         */
+        return  repository.getPersonById(id).orElseThrow
+                ( () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Message"));
     }
 
     @Override

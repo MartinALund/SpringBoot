@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
-    Person getPersonById(long id);
+    Optional<Person> getPersonById(long id);
     @Transactional
     void deletePersonById(long id);
 
